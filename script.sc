@@ -24,4 +24,4 @@ val charHistoUnsorted: Vector[ (String, Int) ] = {
 
 val charHisto: Vector[ (String, Int) ] = charHistoUnsorted.sortBy( _._2).reverse
 
-for ( h <- charHisto) println( s"${h._1})\t${h._2}" )
+for ( h <- charHisto) println( s"${h._1}\t${h._2}" )
