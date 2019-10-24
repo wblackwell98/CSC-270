@@ -1,8 +1,6 @@
 # CSC-270-Work
 
-This is W. Blackwell's Demo Repository
+This is W. Blackwell's repository for work on the text of *Les Miserables* by Victor Hugo.
 
-In here there is:
-- Classwork
-- Useful bits of code
-- Group projects
+In this you can currently find:
+- Character-set Validation
