@@ -7,6 +7,11 @@ import scala.annotation.tailrec
 
 def showMe(v:Any):Unit = {
   v match {
+  	case _:Corpus => {
+  		for ( n <- v.asInstanceOf[Corpus].nodes) {
+  			println(s"${n.urn}\t\t${n.text}")
+  		}	
+  	}
     case _:Vector[Any] => println(s"""\n----\n${v.asInstanceOf[Vector[Any]].mkString("\n")}\n----\n""")
     case _:Iterable[Any] => println(s"""\n----\n${v.asInstanceOf[Iterable[Any]].mkString("\n")}\n----\n""")
     case _ => println(s"\n-----\n${v}\n----\n")
@@ -18,7 +23,7 @@ def loadLibrary(fp:String):CiteLibrary = {
 	library
 }
 
-def loadFile(fp:String):Vector[String] = {
+def loadFile( fp: String ): Vector[String] = {
 	Source.fromFile(fp).getLines.toVector
 }
 
@@ -42,7 +47,7 @@ def splitWithSplitter(text: String, puncs: String =  """[()\[\]·⸁.,; "?·!–
 	text.split(regexWithSplitter).toVector.filter(_.size > 0)
 }
 
-val punctuation: String = """[“”()\[\]·…⸁.,:; "?·!⸂⸃–—-]"""
+val punctuation: String = """[“”“‘()‘’'\[\]·_…⸁.,:; "?·!⸂⸃–—-]"""
 val alphabet: String = """[A-Za-z]"""
 
 
