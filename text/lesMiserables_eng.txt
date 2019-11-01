@@ -1,18 +1,3 @@
-// A file for testing CiteApp
-
-#!cexversion
-3.0
-
-#!citelibrary
-name#demo
-urn#urn:cite2:cex:citeApp.2019a:hugo
-license#This work is in the public domain.
-
-#!ctscatalog
-urn#citationScheme#groupName#workTitle#versionLabel#exemplarLabel#online#lang
-urn:cts:fuLit:vhugo.lesmis.hapgood:#volume/book/chapter/paragraph#Victor Hugo#Les Misérables#Translated by Isabel F. Hapgood, 1887##true#eng
-
-#!ctsdata
 urn:cts:fuLit:vhugo.lesmis.hapgood:1.head#VOLUME I—FANTINE
 urn:cts:fuLit:vhugo.lesmis.hapgood:1.preface.head#PREFACE
 urn:cts:fuLit:vhugo.lesmis.hapgood:1.preface.1#So long as there shall exist, by virtue of law and custom, decrees of amnation pronounced by society, artificially creating hells amid the ivilization of earth, and adding the element of human fate to divine destiny; o long as the three great problems of the century—the degradation of man hrough pauperism, the corruption of woman through hunger, the crippling of hildren through lack of light—are unsolved; so long as social asphyxia is ossible in any part of the world;—in other words, and with a still wider ignificance, so long as ignorance and poverty exist on earth, books of the ature of Les Misérables cannot fail to be of use.
@@ -9245,7 +9230,7 @@ urn:cts:fuLit:vhugo.lesmis.hapgood:4.8.4.43#And she caught her father round the 
 urn:cts:fuLit:vhugo.lesmis.hapgood:4.8.4.44#“Come, now, this is stupid!” said Babet.
 urn:cts:fuLit:vhugo.lesmis.hapgood:4.8.4.45#“Make haste!” said Guelemer, “the cops may pass.”
 urn:cts:fuLit:vhugo.lesmis.hapgood:4.8.4.46#The ventriloquist’s voice repeated his distich:—
-urn:cts:fuLit:vhugo.lesmis.hapgood:4.8.4.47#“Nous n’ sommes pas le jour de l’an, “This isn’t New Year’s day A bécoter apa, maman.” To peck at pa and ma.” 
+urn:cts:fuLit:vhugo.lesmis.hapgood:4.8.4.47#“Nous n’ sommes pas le jour de l’an, “This isn’t New Year’s day A bécoter apa, maman.” To peck at pa and ma.”
 urn:cts:fuLit:vhugo.lesmis.hapgood:4.8.4.48#Éponine turned to the five ruffians.
 urn:cts:fuLit:vhugo.lesmis.hapgood:4.8.4.49#“Why, it’s Monsieur Brujon. Good day, Monsieur Babet. Good day, Monsieur laquesous. Don’t you know me, Monsieur Guelemer? How goes it, ontparnasse?”
 urn:cts:fuLit:vhugo.lesmis.hapgood:4.8.4.50#“Yes, they know you!” ejaculated Thénardier. “But good day, good evening, heer off! leave us alone!”
