@@ -1,0 +1,83 @@
+html {
+	margin: 3em;
+	background-color: #ddd;
+	font-family: Helvetica, Ariel, sans;
+	line-height: 1.5em;
+	color: maroon;
+}
+
+a {
+	text-decoration: none;
+	margin: 0 0.5em 0 0;
+	padding: 3px;
+}
+
+a:hover {
+	background-color: yellow;
+}
+
+header {
+	color: #666;
+}
+
+article {
+	border: 1px solid silver;
+	padding: 2em;
+}
+
+.cts_catalog {
+	font-size: 125%;
+}
+
+.cts_workTitle {
+	font-style: italic;
+}
+
+.cts_citationScheme {
+	color: navy;
+	font-family: DejaVu-Sans-Mono, monospace;
+}
+
+.cts_ref {
+	margin-right: 2em;
+	opacity: 0.5;
+}
+
+.cts_node {
+	margin-top: 1em;
+	max-width: 40em;
+}
+
+progress.cts_progress {
+	width: 100%;
+}
+
+.textOnColor {
+	/* does not work on a medium-gray background! */
+    height: inherit;
+    background: inherit;
+    -webkit-background-clip: text;
+    background-clip: text;
+	color: transparent;
+    text-align: center;
+    filter: invert(1) grayscale(1) contrast(9);
+    display: inline-block;
+}
+
+.cts_tocHyphen:before {
+	content: "–";
+	margin-left: 1em;
+	margin-right: 1em;
+	min-width: 1em;
+	display: inline-block;
+}
+
+.cts_tocBit {
+	min-width: 4em;
+	display: inline-block;
+}
+
+.cts_tocIndex {
+	min-width: 3em;
+	display: inline-block;
+}
