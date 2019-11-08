@@ -3,21 +3,28 @@ html {
 	background-color: #ddd;
 	font-family: Helvetica, Ariel, sans;
 	line-height: 1.5em;
-	color: maroon;
+	color: green;
 }
 
+
+/* Links are `a` elements in HTML */
 a {
 	text-decoration: none;
 	margin: 0 0.5em 0 0;
 	padding: 3px;
 }
 
+/* :hover	 is what it will look like when you hover the mouse over an element */
 a:hover {
 	background-color: yellow;
+	border: 2px solid red ;
 }
 
+/* You can define any color with a 3-digit "hex-code" */
+/* The three values are from 0-F, and represent Red, Green, Blue */
 header {
 	color: #666;
+	font-size: 150%;
 }
 
 article {
@@ -25,19 +32,45 @@ article {
 	padding: 2em;
 }
 
-.cts_catalog {
-	font-size: 125%;
+/* Styles attached to element-names apply to _every_ element
+	 with that name */
+div {
+	border: 2px solid #3af;
+	padding: 5px;
 }
 
+/* To specify style for only _some_ elements
+	 you can identify them by classes (the classes have to be
+	 in the HTML)
+*/
+div.cts_corpus {
+	border: 4px dashed #00f;
+}
+
+
+/* You can specify just a class name… */
 .cts_workTitle {
 	font-style: italic;
 }
 
+/* Fonts are tricky… read about them online! */
 .cts_citationScheme {
 	color: navy;
 	font-family: DejaVu-Sans-Mono, monospace;
 }
 
+.cts_corpusTitle {
+	color: blue ;
+	border: 1px dashed red;
+}
+
+/* You can add space on any side of something with:
+		- margin-right
+		- margin-left
+		- margin-top
+		- margin-bottom
+
+*/
 .cts_ref {
 	margin-right: 2em;
 	opacity: 0.5;
@@ -52,32 +85,3 @@ progress.cts_progress {
 	width: 100%;
 }
 
-.textOnColor {
-	/* does not work on a medium-gray background! */
-    height: inherit;
-    background: inherit;
-    -webkit-background-clip: text;
-    background-clip: text;
-	color: transparent;
-    text-align: center;
-    filter: invert(1) grayscale(1) contrast(9);
-    display: inline-block;
-}
-
-.cts_tocHyphen:before {
-	content: "–";
-	margin-left: 1em;
-	margin-right: 1em;
-	min-width: 1em;
-	display: inline-block;
-}
-
-.cts_tocBit {
-	min-width: 4em;
-	display: inline-block;
-}
-
-.cts_tocIndex {
-	min-width: 3em;
-	display: inline-block;
-}
