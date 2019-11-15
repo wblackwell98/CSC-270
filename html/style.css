@@ -1,9 +1,10 @@
 html {
+	text-align: left;
 	margin: 3em;
-	background-color: #ddd;
-	font-family: Helvetica, Ariel, sans;
-	line-height: 1.5em;
-	color: green;
+	background-color: lightgray;
+	font-family: Trebuchet MS, sans-serif;
+	line-height: 1.2em;
+	color: black;
 }
 
 
@@ -11,42 +12,33 @@ html {
 a {
 	text-decoration: none;
 	margin: 0 0.5em 0 0;
-	padding: 3px;
+	padding: 2px;
 }
 
 /* :hover	 is what it will look like when you hover the mouse over an element */
 a:hover {
-	background-color: yellow;
-	border: 2px solid red ;
+	border: 1px double;
+  box-shadow: inset 0 0 20px rgba(255, 255, 255, .5), 0 0 20px rgba(255, 255, 255, .2);
+  outline-color: black;
+  outline-offset: 15px;
+  text-shadow: 1px 1px 2px #427388;
 }
 
 /* You can define any color with a 3-digit "hex-code" */
 /* The three values are from 0-F, and represent Red, Green, Blue */
 header {
-	color: #666;
-	font-size: 150%;
+	text-align: center;
+	padding-bottom: 1em;
+	color: black;
+	font-style: bold;
+	font-size: 200%;
 }
 
 article {
-	border: 1px solid silver;
-	padding: 2em;
+	text-align: center;
+	border: double 2px silver;
+	padding: 30px;
 }
-
-/* Styles attached to element-names apply to _every_ element
-	 with that name */
-div {
-	border: 2px solid #3af;
-	padding: 5px;
-}
-
-/* To specify style for only _some_ elements
-	 you can identify them by classes (the classes have to be
-	 in the HTML)
-*/
-div.cts_corpus {
-	border: 4px dashed #00f;
-}
-
 
 /* You can specify just a class name… */
 .cts_workTitle {
@@ -60,8 +52,8 @@ div.cts_corpus {
 }
 
 .cts_corpusTitle {
-	color: blue ;
-	border: 1px dashed red;
+	color: black ;
+	text-decoration: underline;
 }
 
 /* You can add space on any side of something with:
@@ -72,16 +64,19 @@ div.cts_corpus {
 
 */
 .cts_ref {
+	float: left;
 	margin-right: 2em;
 	opacity: 0.5;
 }
 
 .cts_node {
-	margin-top: 1em;
-	max-width: 40em;
+	margin-top: 2em;
+	float: center;
+	max-width: 130em;
 }
 
 progress.cts_progress {
 	width: 100%;
+	color: black;
+	margin-top: 1em;
 }
-
