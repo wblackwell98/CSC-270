@@ -57,10 +57,15 @@ object webWriter {
 				println(s"Corpus size = ${corp.size}")
 				println(" \n ")
 
+				/* -------------------------------------- */
 				// 2. Split it into manageable chunks. THERE ARE SEVERAL WAYS TO DO THIS!
-				//val corpVec: Vector[Corpus] = hocuspocus.corpusToChapters( corp, drop = 2 )
-				//val corpVec: Vector[Corpus] = hocuspocus.equalDivs( corp, n = 5 )
-				val corpVec: Vector[Corpus] = hocuspocus.equalSize( corp, target = 5000 )
+
+				//val corpVec: Vector[Corpus] = hocuspocus.corpusToChapters( corp, drop = 1 )
+				val corpVec: Vector[Corpus] = hocuspocus.equalDivs( corp, n = 10 )
+				//val corpVec: Vector[Corpus] = hocuspocus.equalSize( corp, target = 5000 )
+				/* -------------------------------------- */
+
+				// A little reporting… 	
 				println(" \n ")
 				println(s"Will write ${corpVec.size} pages…")
 				println(" \n ")
@@ -135,7 +140,23 @@ object webWriter {
 			val titleString: String = {
 				val fromPsg: String = corp.nodes.head.urn.passageComponent
 				val toPsg: String = corp.nodes.last.urn.passageComponent
-				s"""<div class="cts_corpusTitle">${fromPsg}-${toPsg}</div>"""
+				if ( fromPsg == toPsg ) {
+					val psgString = s"${fromPsg}"
+					s"""
+					<div class="cts_corpusTitle">
+						Passage ${psgString}
+						<span class="cts_ctsUrn">${corp.nodes.head.urn.addPassage(psgString)}</span>
+					</div>
+					"""
+				} else {
+					val psgString = s"${fromPsg}-${toPsg}"
+					s"""
+						<div class="cts_corpusTitle">
+							Passages ${fromPsg}-${toPsg}
+							<span class="cts_ctsUrn">${corp.nodes.head.urn.addPassage(psgString)}</span>
+						</div>
+					"""
+				}
 			}
 
 			val sequenceString: String = {
@@ -172,6 +193,7 @@ object webWriter {
 			<head>
 			<title>${fileName}</title>
 			<link rel="stylesheet" href="../style.css">
+			<link href="https://fonts.googleapis.com/css?family=EB+Garamond:400,400i,500,500i,600,600i,700,700i,800,800i&amp;subset=cyrillic-ext,greek,greek-ext,latin-ext" rel="stylesheet">
 			</head>
 			<body>
 			<header>Your header</header>
@@ -237,10 +259,19 @@ object webWriter {
 		val tocHeader: String = """<div class="cts_toc">Table of Contents</div>"""
 
 		val tocEntries: Vector[String] = vcorp.map( vc => {
-			s"""<li class="cts_tocEntry"><span class="cts_tocIndex">${vc.index + 1}.</span> 
-			<a href="${urnToFileName(vc.corp.nodes.head.urn.dropPassage, Some(vc.index))}">
-			<span class="cts_tocBit">${vc.corp.nodes.head.urn.passageComponent}</span><span class="cts_tocHyphen"/><span class="cts_tocBit">${vc.corp.nodes.last.urn.passageComponent}</span>
-			</a></li>"""
+			val firstPassage: String = vc.corp.nodes.head.urn.passageComponent
+			val lastPassage: String = vc.corp.nodes.last.urn.passageComponent
+			if (firstPassage == lastPassage) {
+				s"""<li class="cts_tocEntry"><span class="cts_tocIndex">${vc.index + 1}.</span> 
+				<a href="${urnToFileName(vc.corp.nodes.head.urn.dropPassage, Some(vc.index))}">
+				<span class="cts_tocBit">${firstPassage}</span>
+				</a></li>"""
+			} else {
+				s"""<li class="cts_tocEntry"><span class="cts_tocIndex">${vc.index + 1}.</span> 
+				<a href="${urnToFileName(vc.corp.nodes.head.urn.dropPassage, Some(vc.index))}">
+				<span class="cts_tocBit">${firstPassage}</span><span class="cts_tocHyphen">–</span><span class="cts_tocBit">${lastPassage}</span>
+				</a></li>"""	
+			}
 		})
 
 		val toc: String = {
@@ -254,6 +285,7 @@ object webWriter {
 			<meta charset="utf-8"/>
 			<title>${titleString}</title>
 			<link rel="stylesheet" href="../style.css">
+			<link href="https://fonts.googleapis.com/css?family=EB+Garamond:400,400i,500,500i,600,600i,700,700i,800,800i&amp;subset=cyrillic-ext,greek,greek-ext,latin-ext" rel="stylesheet">
 			</head>
 			<body>
 			<header>Your header</header>

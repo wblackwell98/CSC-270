@@ -10,56 +10,25 @@ import scala.annotation.tailrec
 
 object hocuspocus {
 
-		/** Stop-gap replacement for defective function in xcite */
-		/*
-    def collapsePassageBy(u: CtsUrn, i: Int) : CtsUrn = {
-      if ( u.isRange ) {
-        val uv: Vector[CtsUrn] = u.rangeToUrnVector
-        val first = uv.head.collapsePassageBy(i)
-        val last = uv.last.collapsePassageBy(i) 
-        val psg = {
-          if (first == last) {
-            s"${first.passageComponent}"
-          } else {
-            s"${first.passageComponent}-${last.passageComponent}"
-          }
-        }
-        u.addPassage(psg)
-      } else {
-        if (u.passageNodeParts.size == 0) {
-          u.dropPassage
-        } else {
-          val citationLevels = u.passageNodeParts(0).split("\\.")
-          if (citationLevels.size > i) {
-            CtsUrn(u.dropPassage.toString + citationLevels.dropRight(i).mkString("."))
-          } else {
-            u.dropPassage
-          }
-        }
-      }
-    }
-    */
-
-
 	/** Split a Corpus in to a Vector[Corpus] by citation
   * (Will first chunk by Text). 
   * @param drop How many levels of the passage-hierarchy, from the right, to drop when grouping
   */
-  def chunkByCitation(corp: Corpus, drop:Int = 1):Vector[Corpus] = {
-    val textChunks:Vector[Corpus] = corp.chunkByText
-    val sectionChunks:Vector[Corpus] = textChunks.map( tc => {
-      val deepestLevel:Int = tc.urns.map(_.citationDepth.head).min
+  def chunkByCitation(corp: Corpus, drop: Int = 1): Vector[Corpus] = {
+    val textChunks: Vector[Corpus] = corp.chunkByText
+    val sectionChunks: Vector[Corpus] = textChunks.map( tc => {
+      val deepestLevel: Int = tc.urns.map(_.citationDepth.head).min
       //println(s"deepestLevel = ${deepestLevel}")
       if (deepestLevel <= drop) {
       	println(s"\n-------\nWARNING: drop = ${drop}. This is larger than, or equal to, ${deepestLevel}, the minimum citation depth in text ${tc.nodes.head.urn.dropPassage}. The corpus will not be divided up!\n------\n")
-        val vc:Vector[Corpus] = Vector(tc)
+        val vc: Vector[Corpus] = Vector(tc)
         vc
       }
       else {
          //println(s"drops = ${drops}")
-         val urnMap:Vector[(CtsUrn, Int)] = tc.urns.zipWithIndex
+         val urnMap: Vector[(CtsUrn, Int)] = tc.urns.zipWithIndex
          // Get vector of node-indices where breaks will happen
-         val breakPoints:Vector[Int] = {
+         val breakPoints: Vector[Int] = {
          	val groupedVec: Vector[ (CtsUrn, Vector[(CtsUrn, Int)])] = {
          		urnMap.groupBy( um => um._1.collapsePassageBy(drop)).toVector
          	}
@@ -69,26 +38,26 @@ object hocuspocus {
          	justHeads
          }
          // Turn that into a map of from-Index, to-Index
-         val chunkMap:Vector[Vector[Int]] = {
-            val slid:Vector[Vector[Int]] = breakPoints.sliding(2,1).toVector
+         val chunkMap: Vector[Vector[Int]] = {
+            val slid: Vector[Vector[Int]] = breakPoints.sliding(2,1).toVector
             // make a pair for the last chunk
-            val lastPair:Vector[Vector[Int]] = {
-              val v:Vector[Int] = Vector( slid.last.last, (urnMap.last._2 + 1) )
+            val lastPair: Vector[Vector[Int]] = {
+              val v: Vector[Int] = Vector( slid.last.last, (urnMap.last._2 + 1) )
               Vector(v)
             }
-            val adjustedSlid:Vector[Vector[Int]] = slid.map( s => {
+            val adjustedSlid: Vector[Vector[Int]] = slid.map( s => {
               Vector(s(0), s(1))
             }) ++ lastPair
             //println(s"${adjustedSlid}")
             adjustedSlid
          }
-         val corpVec:Vector[Corpus] = chunkMap.map( cm => {
+         val corpVec: Vector[Corpus] = chunkMap.map( cm => {
             val fromIndex:Int = cm(0)
             val untilIndex:Int = cm(1)
-            val nodeVec:Vector[CitableNode] = {
+            val nodeVec: Vector[CitableNode] = {
               tc.nodes.slice(fromIndex, untilIndex)
             }
-            val newCorpus:Corpus = Corpus(nodeVec)
+            val newCorpus: Corpus = Corpus(nodeVec)
             newCorpus
          })
          corpVec
@@ -108,6 +77,8 @@ object hocuspocus {
 			Divides a Corpus into Corpora containing equal numbers
 			of passages (regardless of the length of the passage). 
 			`n` is how many Corpora you want.		
+
+			If there is a remainder, you will get n+1 corpora.
 	*/
 	def equalDivs( corp: Corpus, n: Int = 10 ): Vector[Corpus] = {
 			val total: Int = corp.urns.size

@@ -6,7 +6,7 @@ import edu.holycross.shot.cite._
 import edu.holycross.shot.scm._
 import edu.holycross.shot.ohco2._
 import scala.annotation.tailrec
-
+import java.nio.charset.Charset
 
 object utilities {
 	def showMe(v:Any):Unit = {
@@ -24,7 +24,8 @@ object utilities {
 
 	def loadLibrary(fp:String):CiteLibrary = {
 		val file:  File = File(fp)
-		val library = CiteLibrary(file.lines.toVector.mkString("\n"))
+		val tempString: String = file.contentAsString(charset = Charset.forName("UTF-8"))
+		val library = CiteLibrary(tempString)
 		library
 	}
 
