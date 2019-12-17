@@ -128,8 +128,10 @@ val noPuncCorpus: Corpus = {
 	val lcNodes: Vector[CitableNode] = nodes.map( n => {
 		CitableNode( n.urn, n.text.toLowerCase.replaceAll(punctuation,"") )
 	})
-	// return a new, punctuation-free corpus
-	Corpus( lcNodes )
+	// return a new, punctuation-free corpus, with stop words removed
+
+
+	removeStopWords( Corpus( lcNodes ) )
 }
 
 // Using .sliding, let's get some N-grams… `n` is how many words in the pattern.
@@ -198,11 +200,11 @@ def ngrams( n: Int, f: Int, c: Corpus = noPuncCorpus ): Vector[ ( String, Int) ]
 	{
 		val ngt = makeNGramTuples(n, c)
 		val ngh = makeNGramHisto(ngt, f)
-		shoeMe( ngh.reverse )
+		showMe( ngh.reverse )
 		ngh
 
 	}
 
 showMe(ngh)
 
-val anExcellentCitizen: Set[CtsUrn] = urnsForNGram("an excellent citizen", ngt)
+val jeanSpeaks: Set[CtsUrn] = urnsForNGram("dit jean valjean", ngt)
