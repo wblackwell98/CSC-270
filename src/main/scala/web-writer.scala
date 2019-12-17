@@ -191,12 +191,13 @@ object webWriter {
 			<!doctype html>
 			<html>
 			<head>
+			<meta charset="utf-8"/>
 			<title>${fileName}</title>
 			<link rel="stylesheet" href="../style.css">
 			<link href="https://fonts.googleapis.com/css?family=EB+Garamond:400,400i,500,500i,600,600i,700,700i,800,800i&amp;subset=cyrillic-ext,greek,greek-ext,latin-ext" rel="stylesheet">
 			</head>
 			<body>
-			<header>Your header</header>
+			<header>Les Misérables</header>
 			<article>
 			${sequenceString}
 			${catString}
@@ -206,7 +207,7 @@ object webWriter {
 			${corpString}
 			${navString}
 			</article>
-			<footer>Your footer</footer>
+			<footer></footer>
 			</body>
 			</html>
 			"""
@@ -254,24 +255,16 @@ object webWriter {
 
 		val titleString: String = workCat.toString // can fancify this
 
-		val infoString: String = """<div class="cts_siteDesc">Whatever you want to say here.</div>"""
+		val infoString: String = """<div class="cts_siteDesc">Ici il faut que on clicke dans le chapitre qu'on prefferes. </div>"""
 
 		val tocHeader: String = """<div class="cts_toc">Table of Contents</div>"""
 
 		val tocEntries: Vector[String] = vcorp.map( vc => {
-			val firstPassage: String = vc.corp.nodes.head.urn.passageComponent
-			val lastPassage: String = vc.corp.nodes.last.urn.passageComponent
-			if (firstPassage == lastPassage) {
+			val firstPassage: String = vc.corp.nodes.head.text
 				s"""<li class="cts_tocEntry"><span class="cts_tocIndex">${vc.index + 1}.</span>
 				<a href="${urnToFileName(vc.corp.nodes.head.urn.dropPassage, Some(vc.index))}">
 				<span class="cts_tocBit">${firstPassage}</span>
 				</a></li>"""
-			} else {
-				s"""<li class="cts_tocEntry"><span class="cts_tocIndex">${vc.index + 1}.</span>
-				<a href="${urnToFileName(vc.corp.nodes.head.urn.dropPassage, Some(vc.index))}">
-				<span class="cts_tocBit">${firstPassage}</span><span class="cts_tocHyphen">–</span><span class="cts_tocBit">${lastPassage}</span>
-				</a></li>"""
-			}
 		})
 
 		val toc: String = {

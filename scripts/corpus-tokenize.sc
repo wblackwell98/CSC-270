@@ -8,7 +8,7 @@ import java.util.Calendar
 
 :load utilities.sc
 
-val lib: CiteLibrary = loadLibrary("text/arist_politics.cex")
+val lib: CiteLibrary = loadLibrary("text/lesMiserables_fra.cex")
 
 val tr: TextRepository = lib.textRepository.get
 
@@ -18,7 +18,7 @@ val corp: Corpus = tr.corpus
 
 /* Let's make a *tokenized exemplar*! */
 
-/* 
+/*
 What defines a word-break? Note the [ ], making this a regex…
 … "any one of these"
 */
@@ -34,7 +34,7 @@ val splitters: String = """[“”“‘()‘\[\]·_…⸁.,:; "?·!⸂⸃–—
 		6. Return that Citable Node
 */
 
-// We are defining a function here! 
+// We are defining a function here!
 def tokenizeCorpus ( c: Corpus, exemplarLabel: String = "wt", corpFunc: Corpus => Corpus = c => c ): Corpus = {
 	// for each node in our corpus…
 	val tokenizedVector: Vector[CitableNode] = c.nodes.map( n => {
@@ -105,4 +105,3 @@ def removeStopWords( c: Corpus ): Corpus = {
 //val tokenCorpus: Corpus = tokenizeCorpus( corp, "tokens" )
 //val lcTokenCorpus: Corpus = tokenizeCorpus( corp, "lcTokens", lowerCaseNodes )
 //val noStopWordsCorpus: Corpus = tokenizeCorpus( corp, "sigTokens", removeStopWords )
-

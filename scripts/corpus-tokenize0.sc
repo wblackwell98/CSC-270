@@ -21,7 +21,7 @@ Remember: Scroll up to the FIRST error. Fix that, then re-run.
 
 *********************************************** */
 
-val lib: CiteLibrary = loadLibrary("text/arist_politics.cex")
+val lib: CiteLibrary = loadLibrary("text/lesMiserables_fra.cex")
 
 val tr: TextRepository = lib.textRepository.get
 
@@ -33,7 +33,7 @@ val corp: Corpus = tr.corpus
 
 /* Let's turn a CTS text into a Vector[String] by word-tokenizing! */
 
-/* 
+/*
 What defines a word-break? Note the [ ], making this a regex…
 … "any one of these"
 */
@@ -52,10 +52,10 @@ val splitters: String = """[.,:; ?!]"""
 val tokenizedVector: Vector[String] = corp.nodes.flatMap( n => {
 
 	// for each node, get just the .text
-	val txt: String = n // why is this an error?
+	val txt: String = n.text.toLowercase // why is this an error?
 
 	// Split up the text into tokens
-	val tokenizedText: Vector[String] = txt.split(splitters) // why won't this run?
+	val tokenizedText: Vector[String] = txt.split(splitters).toVector // why won't this run?
 
 	// We don't want empty nodes! So we filter them out…
 	val noEmpties: Vector[String] = tokenizedText.filter( _.size > 0 )
@@ -72,13 +72,13 @@ val tokenizedVector: Vector[String] = corp.nodes.flatMap( n => {
 val tokenHisto: Vector[(String, Int)] = {
 
 	// assemble words into groups…
-	val grouped: Vector[( String, Vector[String])] = tokenizedVector.groupBy( t => t) // Why an error here?
+	val grouped: Vector[( String, Vector[String])] = tokenizedVector.groupBy( t => t).toVector // Why an error here?
 
-	// Map the _._2 part of tuple _out of_ a Vector[String] and _into_ its size…	
+	// Map the _._2 part of tuple _out of_ a Vector[String] and _into_ its size…
 	val remapped: Vector[ ( String, Int) ] = grouped.map( t => (t._1, t._2.size))
 
 	// Sort…
-	val sorted: Vector[ ( String, Int) ] =  remapped.sortBy( _._2 )
+	val sorted: Vector[ ( String, Int) ] =  remapped.sortBy( _._2 ).reverse
 
 	// Return the histogram…
 	sorted
@@ -92,5 +92,3 @@ showMe(tokenHisto)
 	- Here "But" and "but" are two listings. How to fix this?	Where?
 
 */
-
-

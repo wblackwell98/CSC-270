@@ -4,7 +4,7 @@
 :load utilities.sc
 
 
-val lib: CiteLibrary = loadLibrary("text/arist_politics.cex")
+val lib: CiteLibrary = loadLibrary("text/lesMiserables_fra.cex")
 
 val tr: TextRepository = lib.textRepository.get
 
@@ -21,4 +21,3 @@ val tokens: Vector[String] = oneBigString.split(punctuation).toVector
 // How to get rid of empty tokens
 
 val noEmpties: Vector[String] = tokens.filter( _.size > 0 )
-

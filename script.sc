@@ -2,7 +2,7 @@ import scala.io.Source
 
 :load utilities.sc
 
-val myLines: Vector[String] = loadFile("text/LesMis.txt")
+val myLines: Vector[String] = loadFile("text/LesMiserables_fra.cex")
 
 val oneBigString: String = myLines.mkString(" ")
 
