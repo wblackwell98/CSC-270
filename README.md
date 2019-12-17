@@ -3,7 +3,7 @@
 This is William Blackwell's repository for work on the text of *Les Miserables* by Victor Hugo.
 
 # Victor Hugo, *Les Miserables*
-A citable digital edition. This edition has had a character-set validation to ensure that all characters are consistent. In this read.me you are provided with both the character-set list and a character-set count. There is also `scripts/ngrams2.sc` which will allow you to run an n-gram analysis of the text without including stopwords.
+A citable digital edition. This edition has had a character-set validation to ensure that all characters are consistent. In this read.me you are provided with both the character-set list and a character-set count. Here you can also find `scripts/ngrams2.sc` which will allow you to run an n-gram analysis of the text without including stopwords.
 
 **status:** In progress.
 
